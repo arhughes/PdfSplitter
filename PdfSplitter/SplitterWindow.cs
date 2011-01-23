@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace PdfSplitter
 {
@@ -83,7 +85,6 @@ namespace PdfSplitter
 
         void LoadImages()
         {
-
             preview_panel.Controls.Clear();
 
             status_progress.Value = 0;
@@ -210,6 +211,64 @@ namespace PdfSplitter
                 }
 
                 return buffer;
+            }
+        }
+
+        private void save_button_Click(object sender, EventArgs e)
+        {
+            int[] pages = new int[] { 1, 2 };
+            CreatePdf(m_path, pages, @"c:\temp\test.pdf");
+        }
+
+        void CreatePdf(string input_path, IList<int> pages, string output_path)
+        {
+            // open a reader for the source file
+            PdfReader reader = new PdfReader(input_path);
+
+            try
+            {
+                // get output file
+                using (var fs = File.OpenWrite(output_path))
+                {
+                    // create input document
+                    var input_doc = new iTextSharp.text.Document(reader.GetPageSizeWithRotation(pages[0]));
+                    // create the writer
+                    PdfWriter writer = PdfWriter.GetInstance(input_doc, fs);
+                    try
+                    {
+                        input_doc.Open();
+                        try
+                        {
+                            // for each page copy the page directly from the reader into the writer
+                            PdfContentByte cb = writer.DirectContent;
+                            foreach (int page_number in pages)
+                            {
+                                input_doc.SetPageSize(reader.GetPageSizeWithRotation(page_number));
+                                input_doc.NewPage();
+
+                                PdfImportedPage page = writer.GetImportedPage(reader, page_number);
+
+                                int rotation = reader.GetPageRotation(page_number);
+                                if (rotation == 90 || rotation == 270)
+                                    cb.AddTemplate(page, 0, -1f, 1f, 0, 0, reader.GetPageSizeWithRotation(page_number).Height);
+                                else
+                                    cb.AddTemplate(page, 1f, 0, 0, 1f, 0, 0);
+                            }
+                        }
+                        finally
+                        {
+                            input_doc.Close();
+                        }
+                    }
+                    finally
+                    {
+                        writer.Close();
+                    }
+                }
+            }
+            finally
+            {
+                reader.Close();
             }
         }
     }
