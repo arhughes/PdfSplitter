@@ -239,8 +239,10 @@ namespace PdfSplitter
 
             try
             {
+                reader.RemoveUnusedObjects();
+
                 // get output file
-                using (var fs = File.OpenWrite(output_path))
+                using (var fs = new FileStream(output_path, FileMode.Create, FileAccess.Write))
                 {
                     // create input document
                     var input_doc = new iTextSharp.text.Document(reader.GetPageSizeWithRotation(pages[0]));
@@ -248,6 +250,7 @@ namespace PdfSplitter
                     PdfWriter writer = PdfWriter.GetInstance(input_doc, fs);
                     try
                     {
+                        writer.SetFullCompression();
                         input_doc.Open();
                         try
                         {
