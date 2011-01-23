@@ -1,6 +1,6 @@
 ﻿namespace PdfSplitter
 {
-    partial class Form1
+    partial class SplitterWindow
     {
         /// <summary>
         /// Required designer variable.

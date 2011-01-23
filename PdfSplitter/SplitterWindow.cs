@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace PdfSplitter
 {
-    public partial class Form1 : Form
+    public partial class SplitterWindow : Form
     {
-        public Form1()
+        public SplitterWindow()
         {
             InitializeComponent();
         }
