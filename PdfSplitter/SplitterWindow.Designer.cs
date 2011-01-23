@@ -31,6 +31,12 @@
             this.open_button = new System.Windows.Forms.Button();
             this.preview_panel = new System.Windows.Forms.FlowLayoutPanel();
             this.preview_size_combo = new System.Windows.Forms.ComboBox();
+            this.status_strip = new System.Windows.Forms.StatusStrip();
+            this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.status_progress = new System.Windows.Forms.ToolStripProgressBar();
+            this.status_progress_label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.springy_label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.status_strip.SuspendLayout();
             this.SuspendLayout();
             // 
             // open_button
@@ -67,17 +73,59 @@
             this.preview_size_combo.Size = new System.Drawing.Size(121, 21);
             this.preview_size_combo.TabIndex = 3;
             // 
+            // status_strip
+            // 
+            this.status_strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.status_label,
+            this.springy_label,
+            this.status_progress_label,
+            this.status_progress});
+            this.status_strip.Location = new System.Drawing.Point(0, 460);
+            this.status_strip.Name = "status_strip";
+            this.status_strip.Size = new System.Drawing.Size(684, 22);
+            this.status_strip.TabIndex = 4;
+            this.status_strip.Text = "statusStrip1";
+            // 
+            // status_label
+            // 
+            this.status_label.Name = "status_label";
+            this.status_label.Size = new System.Drawing.Size(0, 17);
+            // 
+            // status_progress
+            // 
+            this.status_progress.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.status_progress.Name = "status_progress";
+            this.status_progress.Size = new System.Drawing.Size(100, 16);
+            this.status_progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.status_progress.Visible = false;
+            // 
+            // status_progress_label
+            // 
+            this.status_progress_label.Name = "status_progress_label";
+            this.status_progress_label.Size = new System.Drawing.Size(0, 17);
+            this.status_progress_label.Visible = false;
+            // 
+            // springy_label
+            // 
+            this.springy_label.Name = "springy_label";
+            this.springy_label.Size = new System.Drawing.Size(536, 17);
+            this.springy_label.Spring = true;
+            // 
             // SplitterWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 482);
+            this.Controls.Add(this.status_strip);
             this.Controls.Add(this.preview_size_combo);
             this.Controls.Add(this.preview_panel);
             this.Controls.Add(this.open_button);
             this.Name = "SplitterWindow";
             this.Text = "PDF Splitter";
+            this.status_strip.ResumeLayout(false);
+            this.status_strip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -86,6 +134,11 @@
         private System.Windows.Forms.Button open_button;
         private System.Windows.Forms.FlowLayoutPanel preview_panel;
         private System.Windows.Forms.ComboBox preview_size_combo;
+        private System.Windows.Forms.StatusStrip status_strip;
+        private System.Windows.Forms.ToolStripStatusLabel status_label;
+        private System.Windows.Forms.ToolStripProgressBar status_progress;
+        private System.Windows.Forms.ToolStripStatusLabel status_progress_label;
+        private System.Windows.Forms.ToolStripStatusLabel springy_label;
     }
 }
 

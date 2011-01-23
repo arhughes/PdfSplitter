@@ -64,21 +64,70 @@ namespace PdfSplitter
 
         void LoadImages()
         {
-            int pages = m_doc.PageCount;
 
             preview_panel.Controls.Clear();
 
-            // render each page and stuff them into the preview panel
+            status_progress.Value = 0;
+            status_progress.Visible = true;
+            status_progress_label.Visible = true;
+
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+            worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
+            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+
+            status_label.Text = string.Format("Loading {0}", m_path);
+            worker.RunWorkerAsync(worker);
+        }
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = (BackgroundWorker)e.Argument;
+            int pages = m_doc.PageCount;
+            List<Image> images = new List<Image>();
+
+            // render each page and stuff them into the list
             for (int i = 0; i < pages; i++)
             {
+                worker.ReportProgress(i, pages);
                 Image image = RenderPage(m_doc, i);
+                images.Add(image);
+            }
+
+            worker.ReportProgress(pages, pages);
+            e.Result = images;
+        }
+
+        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            int pages = (int)e.UserState;
+            
+            status_progress.Value = 100 * e.ProgressPercentage / pages;
+            if (e.ProgressPercentage < pages)
+                status_progress_label.Text = string.Format("Page {0} of {1}", e.ProgressPercentage + 1, pages);
+        }
+
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            List<Image> images = (List<Image>)e.Result;
+
+            status_progress_label.Text = "";
+
+            foreach (Image image in images)
+            {
                 PictureBox box = new PictureBox();
                 box.Size = GetPreviewSize(image, preview_size_combo.Text);
                 box.SizeMode = PictureBoxSizeMode.Zoom;
                 box.Image = image;
                 preview_panel.Controls.Add(box);
             }
+
+            status_progress_label.Visible = false;
+            status_progress.Visible = false;
+            status_label.Text = string.Format("Loaded {0}", m_path);
         }
+
 
         Size GetPreviewSize(Image image, string preview_size)
         {
