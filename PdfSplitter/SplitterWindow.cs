@@ -48,6 +48,7 @@ namespace PdfSplitter
         {
             int pages = m_doc.PageCount;
 
+            // render each page and stuff them into the preview panel
             for (int i = 0; i < pages; i++)
             {
                 Image image = RenderPage(m_doc, i);

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.open_button = new System.Windows.Forms.Button();
-            this.preview_panel = new System.Windows.Forms.Panel();
+            this.preview_panel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // open_button
@@ -47,8 +47,8 @@
             this.preview_panel.AutoScroll = true;
             this.preview_panel.Location = new System.Drawing.Point(12, 41);
             this.preview_panel.Name = "preview_panel";
-            this.preview_panel.Size = new System.Drawing.Size(660, 178);
-            this.preview_panel.TabIndex = 1;
+            this.preview_panel.Size = new System.Drawing.Size(660, 245);
+            this.preview_panel.TabIndex = 2;
             // 
             // SplitterWindow
             // 
@@ -66,7 +66,7 @@
         #endregion
 
         private System.Windows.Forms.Button open_button;
-        private System.Windows.Forms.Panel preview_panel;
+        private System.Windows.Forms.FlowLayoutPanel preview_panel;
     }
 }
 
