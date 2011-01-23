@@ -16,6 +16,18 @@ namespace PdfSplitter
         string m_path;
         PDFLibNet.PDFWrapper m_doc;
 
+        public SplitterWindow(string path) : this()
+        {
+            m_path = path;
+            this.Load += new EventHandler(SplitterWindow_Load);
+        }
+
+        void SplitterWindow_Load(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(m_path))
+                OpenFile(m_path); 
+        }
+
         public SplitterWindow()
         {
             InitializeComponent();
