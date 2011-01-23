@@ -33,9 +33,10 @@
             this.preview_size_combo = new System.Windows.Forms.ComboBox();
             this.status_strip = new System.Windows.Forms.StatusStrip();
             this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
-            this.status_progress = new System.Windows.Forms.ToolStripProgressBar();
-            this.status_progress_label = new System.Windows.Forms.ToolStripStatusLabel();
             this.springy_label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.status_progress_label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.status_progress = new System.Windows.Forms.ToolStripProgressBar();
+            this.file_panel = new System.Windows.Forms.FlowLayoutPanel();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,6 +92,18 @@
             this.status_label.Name = "status_label";
             this.status_label.Size = new System.Drawing.Size(0, 17);
             // 
+            // springy_label
+            // 
+            this.springy_label.Name = "springy_label";
+            this.springy_label.Size = new System.Drawing.Size(669, 17);
+            this.springy_label.Spring = true;
+            // 
+            // status_progress_label
+            // 
+            this.status_progress_label.Name = "status_progress_label";
+            this.status_progress_label.Size = new System.Drawing.Size(0, 17);
+            this.status_progress_label.Visible = false;
+            // 
             // status_progress
             // 
             this.status_progress.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -99,23 +112,23 @@
             this.status_progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.status_progress.Visible = false;
             // 
-            // status_progress_label
+            // file_panel
             // 
-            this.status_progress_label.Name = "status_progress_label";
-            this.status_progress_label.Size = new System.Drawing.Size(0, 17);
-            this.status_progress_label.Visible = false;
-            // 
-            // springy_label
-            // 
-            this.springy_label.Name = "springy_label";
-            this.springy_label.Size = new System.Drawing.Size(536, 17);
-            this.springy_label.Spring = true;
+            this.file_panel.AllowDrop = true;
+            this.file_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.file_panel.Location = new System.Drawing.Point(12, 292);
+            this.file_panel.Name = "file_panel";
+            this.file_panel.Size = new System.Drawing.Size(660, 165);
+            this.file_panel.TabIndex = 5;
             // 
             // SplitterWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 482);
+            this.Controls.Add(this.file_panel);
             this.Controls.Add(this.status_strip);
             this.Controls.Add(this.preview_size_combo);
             this.Controls.Add(this.preview_panel);
@@ -139,6 +152,7 @@
         private System.Windows.Forms.ToolStripProgressBar status_progress;
         private System.Windows.Forms.ToolStripStatusLabel status_progress_label;
         private System.Windows.Forms.ToolStripStatusLabel springy_label;
+        private System.Windows.Forms.FlowLayoutPanel file_panel;
     }
 }
 

@@ -20,7 +20,26 @@ namespace PdfSplitter
 
             preview_size_combo.SelectedIndex = 1;
             preview_size_combo.SelectedIndexChanged += new EventHandler(preview_size_combo_SelectedIndexChanged);
+
+            file_panel.DragEnter += new DragEventHandler(file_panel_DragEnter);
+            file_panel.DragDrop += new DragEventHandler(file_panel_DragDrop);
         }
+
+        void file_panel_DragDrop(object sender, DragEventArgs e)
+        {
+            var box = e.Data.GetData(typeof(PictureBox)) as PictureBox;
+            file_panel.Controls.Add(box);
+            preview_panel.Controls.Remove(box);
+        }
+
+        void file_panel_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(PictureBox)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+        }
+
 
         void preview_size_combo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -120,12 +139,19 @@ namespace PdfSplitter
                 box.Size = GetPreviewSize(image, preview_size_combo.Text);
                 box.SizeMode = PictureBoxSizeMode.Zoom;
                 box.Image = image;
+                box.MouseDown += new MouseEventHandler(box_MouseDown);
                 preview_panel.Controls.Add(box);
             }
 
             status_progress_label.Visible = false;
             status_progress.Visible = false;
             status_label.Text = string.Format("Loaded {0}", m_path);
+        }
+
+        void box_MouseDown(object sender, MouseEventArgs e)
+        {
+            var box = sender as PictureBox;
+            box.DoDragDrop(box, DragDropEffects.Move);
         }
 
 
