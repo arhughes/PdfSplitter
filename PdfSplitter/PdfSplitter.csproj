@@ -72,6 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SplitterWindow.cs">
       <SubType>Form</SubType>
     </Compile>

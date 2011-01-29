@@ -41,14 +41,14 @@ namespace PdfSplitter
 
         void file_panel_DragDrop(object sender, DragEventArgs e)
         {
-            var box = e.Data.GetData(typeof(PictureBox)) as PictureBox;
+            var box = e.Data.GetData(typeof(PageContainer)) as PageContainer;
             file_panel.Controls.Add(box);
             preview_panel.Controls.Remove(box);
         }
 
         void file_panel_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(PictureBox)))
+            if (e.Data.GetDataPresent(typeof(PageContainer)))
             {
                 e.Effect = DragDropEffects.Move;
             }
@@ -62,7 +62,7 @@ namespace PdfSplitter
 
             foreach (Control control in preview_panel.Controls)
             {
-                PictureBox box = control as PictureBox;
+                PageContainer box = control as PageContainer;
                 if (box != null)
                 {
                     box.Size = GetPreviewSize(box.Image, size);
@@ -146,12 +146,10 @@ namespace PdfSplitter
 
             status_progress_label.Text = "";
 
-            foreach (Image image in images)
+            for (int i = 0; i < images.Count; i++)
             {
-                PictureBox box = new PictureBox();
-                box.Size = GetPreviewSize(image, preview_size_combo.Text);
-                box.SizeMode = PictureBoxSizeMode.Zoom;
-                box.Image = image;
+                PageContainer box = new PageContainer(i + 1, images[i]);
+                box.Size = GetPreviewSize(box.Image, preview_size_combo.Text);
                 box.MouseDown += new MouseEventHandler(box_MouseDown);
                 preview_panel.Controls.Add(box);
             }
@@ -163,7 +161,7 @@ namespace PdfSplitter
 
         void box_MouseDown(object sender, MouseEventArgs e)
         {
-            var box = sender as PictureBox;
+            var box = sender as PageContainer;
             box.DoDragDrop(box, DragDropEffects.Move);
         }
 
@@ -228,8 +226,29 @@ namespace PdfSplitter
 
         private void save_button_Click(object sender, EventArgs e)
         {
-            int[] pages = new int[] { 1, 2 };
-            CreatePdf(m_path, pages, @"c:\temp\test.pdf");
+            List<int> pages = new List<int>();
+
+            foreach (Control control in file_panel.Controls)
+            {
+                var page = control as PageContainer;
+                if (page != null)
+                    pages.Add(page.PageNumber);
+            }
+
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "PDF File (*.pdf)|*.pdf";
+                if (sfd.ShowDialog(this) == DialogResult.OK)
+                {
+                    // create a new pdf with the selected pages
+                    CreatePdf(m_path, pages, sfd.FileName);
+
+                    //TODO: probably write all the remaining pages back to the original
+
+                    // if that was successful, get rid of the pages we just output
+                    file_panel.Controls.Clear();
+                }
+            }
         }
 
         void CreatePdf(string input_path, IList<int> pages, string output_path)
