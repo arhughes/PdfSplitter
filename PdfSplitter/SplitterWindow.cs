@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using iTextSharp.text.pdf;
 using System.IO;
+using System.Collections;
 
 namespace PdfSplitter
 {
@@ -60,7 +61,13 @@ namespace PdfSplitter
             // preview size changed, reload the images
             string size = preview_size_combo.Text;
 
-            foreach (Control control in preview_panel.Controls)
+            ResizePreviews(size, preview_panel.Controls);
+            ResizePreviews(size, file_panel.Controls);
+        }
+
+        void ResizePreviews(string size, IList controls)
+        {
+            foreach (Control control in controls)
             {
                 PageContainer box = control as PageContainer;
                 if (box != null)
