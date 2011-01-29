@@ -38,6 +38,8 @@
             this.status_progress = new System.Windows.Forms.ToolStripProgressBar();
             this.file_panel = new System.Windows.Forms.FlowLayoutPanel();
             this.save_button = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,9 +59,9 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.preview_panel.AutoScroll = true;
-            this.preview_panel.Location = new System.Drawing.Point(12, 41);
+            this.preview_panel.Location = new System.Drawing.Point(12, 56);
             this.preview_panel.Name = "preview_panel";
-            this.preview_panel.Size = new System.Drawing.Size(660, 245);
+            this.preview_panel.Size = new System.Drawing.Size(660, 196);
             this.preview_panel.TabIndex = 2;
             // 
             // preview_size_combo
@@ -82,7 +84,7 @@
             this.springy_label,
             this.status_progress_label,
             this.status_progress});
-            this.status_strip.Location = new System.Drawing.Point(0, 549);
+            this.status_strip.Location = new System.Drawing.Point(0, 515);
             this.status_strip.Name = "status_strip";
             this.status_strip.Size = new System.Drawing.Size(684, 22);
             this.status_strip.TabIndex = 4;
@@ -118,15 +120,15 @@
             this.file_panel.AllowDrop = true;
             this.file_panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.file_panel.Location = new System.Drawing.Point(12, 292);
+            this.file_panel.Location = new System.Drawing.Point(12, 285);
             this.file_panel.Name = "file_panel";
-            this.file_panel.Size = new System.Drawing.Size(660, 225);
+            this.file_panel.Size = new System.Drawing.Size(660, 198);
             this.file_panel.TabIndex = 5;
             // 
             // save_button
             // 
             this.save_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.save_button.Location = new System.Drawing.Point(12, 523);
+            this.save_button.Location = new System.Drawing.Point(12, 489);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(75, 23);
             this.save_button.TabIndex = 6;
@@ -134,11 +136,32 @@
             this.save_button.UseVisualStyleBackColor = true;
             this.save_button.Click += new System.EventHandler(this.save_button_Click);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 269);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Output Pages";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 38);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Input pages";
+            // 
             // SplitterWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 571);
+            this.ClientSize = new System.Drawing.Size(684, 537);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.save_button);
             this.Controls.Add(this.file_panel);
             this.Controls.Add(this.status_strip);
@@ -166,6 +189,8 @@
         private System.Windows.Forms.ToolStripStatusLabel springy_label;
         private System.Windows.Forms.FlowLayoutPanel file_panel;
         private System.Windows.Forms.Button save_button;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
