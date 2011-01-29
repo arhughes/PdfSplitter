@@ -116,16 +116,16 @@
             // file_panel
             // 
             this.file_panel.AllowDrop = true;
-            this.file_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.file_panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.file_panel.Location = new System.Drawing.Point(12, 292);
             this.file_panel.Name = "file_panel";
-            this.file_panel.Size = new System.Drawing.Size(660, 199);
+            this.file_panel.Size = new System.Drawing.Size(660, 225);
             this.file_panel.TabIndex = 5;
             // 
             // save_button
             // 
+            this.save_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.save_button.Location = new System.Drawing.Point(12, 523);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(75, 23);
